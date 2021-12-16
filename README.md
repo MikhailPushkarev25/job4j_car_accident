@@ -1,0 +1,2 @@
+[![Build Status](https://app.travis-ci.com/MikhailPushkarev25/job4j_car_accident.svg?branch=master)](https://app.travis-ci.com/MikhailPushkarev25/job4j_car_accident)
+[![codecov](https://codecov.io/gh/MikhailPushkarev25/job4j_car_accident/branch/master/graph/badge.svg?token=X37ocueHjc)](https://codecov.io/gh/MikhailPushkarev25/job4j_car_accident)
