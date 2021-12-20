@@ -25,14 +25,26 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Авто</th>
+                <th scope="col">#</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Текст</th>
+                <th scope="col">Адрес</th>
             </tr>
             </thead>
             <tbody>
-             <c:forEach items="${users}" var="user">
+             <c:forEach items="${mem}" var="mems">
              <tr>
                  <td>
-                     <c:out value="${user}"/>
+                     <c:out value="${mems.id}"/>
+                 </td>
+                 <td>
+                     <c:out value="${mems.name}"/>
+                 </td>
+                 <td>
+                     <c:out value="${mems.text}"/>
+                 </td>
+                 <td>
+                     <c:out value="${mems.address}"/>
                  </td>
              </tr>
              </c:forEach>
