@@ -32,19 +32,19 @@
             </tr>
             </thead>
             <tbody>
-             <c:forEach items="${mem}" var="mems">
+             <c:forEach items="${users}" var="user">
              <tr>
                  <td>
-                     <c:out value="${mems.id}"/>
+                     <c:out value="${user.id}"/>
                  </td>
                  <td>
-                     <c:out value="${mems.name}"/>
+                     <c:out value="${user.name}"/>
                  </td>
                  <td>
-                     <c:out value="${mems.text}"/>
+                     <c:out value="${user.text}"/>
                  </td>
                  <td>
-                     <c:out value="${mems.address}"/>
+                     <c:out value="${user.address}"/>
                  </td>
              </tr>
              </c:forEach>
