@@ -18,7 +18,11 @@ public class AccidentService {
         result.put(id, accident);
     }
 
-    public Collection<Accident> get() {
+    public Accident getAccident(int id) {
+        return result.get(id);
+    }
+
+    public Map<Integer, Accident> findAll() {
         return result.getAll();
     }
 }

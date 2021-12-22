@@ -7,11 +7,13 @@ import ru.job4j.accident.service.AccidentService;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
 
     private final Map<Integer, Accident> accidents = new HashMap<>();
+    private AtomicInteger size = new AtomicInteger(4);
 
     public AccidentMem() {
         accidents.put(1, new Accident(1, "Михаил", "Превышение скорости", "пр-кт Ленина 32"));
@@ -23,8 +25,17 @@ public class AccidentMem {
         accidents.put(id, accident);
     }
 
-    public Collection<Accident> getAll() {
-        return accidents.values();
+    public void create(Accident accident) {
+            accident.setId(size.getAndIncrement());
+        accidents.put(accident.getId(), accident);
+    }
+
+    public Accident get(int id) {
+        return accidents.get(id);
+    }
+
+    public Map<Integer, Accident> getAll() {
+        return accidents;
     }
 
 }
