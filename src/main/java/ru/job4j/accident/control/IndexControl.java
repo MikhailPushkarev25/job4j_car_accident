@@ -10,7 +10,6 @@ import java.util.Map;
 
 @Controller
 public class IndexControl {
-
     private AccidentService service;
 
     public IndexControl(AccidentService service) {
