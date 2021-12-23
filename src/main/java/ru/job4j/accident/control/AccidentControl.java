@@ -1,19 +1,19 @@
 package ru.job4j.accident.control;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.service.AccidentService;
 
 @Controller
 public class AccidentControl {
 
-    private AccidentMem accidents;
+    private AccidentService service;
 
-    public AccidentControl(AccidentMem accidents) {
-        this.accidents = accidents;
+    public AccidentControl(AccidentService service) {
+        this.service = service;
     }
 
     @GetMapping("/create")
@@ -23,18 +23,19 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident) {
-        accidents.create(accident);
+        service.create(accident);
         return "redirect:/";
     }
 
-    @GetMapping("/edit")
-    public String edit() {
-        return "accident/edit";
+    @GetMapping("/update")
+    public String update(@RequestParam("id") int id, Model model) {
+        Accident accident = service.findById(id);
+        model.addAttribute("users", accident);
+        return "accident/update";
     }
 
-    @PostMapping("/saveEdit")
-    public String saveEdit(@ModelAttribute Accident accident) {
-        accidents.create(accident);
+    @PostMapping("/saveUp")
+    public String saveUp(@ModelAttribute Accident accident) {
         return "redirect:/";
     }
 }
