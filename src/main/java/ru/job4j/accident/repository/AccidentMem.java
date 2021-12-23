@@ -30,12 +30,16 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
+    public Accident findById(int id) {
+        return accidents.get(id);
+    }
+
     public Accident get(int id) {
         return accidents.get(id);
     }
 
-    public Map<Integer, Accident> getAll() {
-        return accidents;
+    public Collection<Accident> getAll() {
+        return accidents.values();
     }
 
 }
