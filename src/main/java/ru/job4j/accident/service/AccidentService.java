@@ -14,15 +14,23 @@ public class AccidentService {
         this.result = result;
     }
 
-    public void saveAccident(int id, Accident accident) {
-        result.put(id, accident);
+    public void create(Accident accident) {
+        result.create(accident);
+    }
+
+    public Accident findById(int id) {
+        return result.findById(id);
     }
 
     public Accident getAccident(int id) {
         return result.get(id);
     }
 
-    public Map<Integer, Accident> findAll() {
+    public Collection<Accident> findAll() {
         return result.getAll();
+    }
+
+    public void save(Accident accident) {
+        result.save(accident);
     }
 }

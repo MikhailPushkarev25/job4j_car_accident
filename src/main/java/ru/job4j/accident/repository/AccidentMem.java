@@ -36,6 +36,11 @@ public class AccidentMem {
         return accidents.get(id);
     }
 
+    public void save(Accident accident) {
+        accident.setId(size.getAndIncrement());
+        accidents.put(accident.getId(), accident);
+    }
+
     public Collection<Accident> getAll() {
         return accidents.values();
     }
