@@ -43,6 +43,17 @@
                 </select>
             </div>
         </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="rIds">Статьи</label>
+                <select class="form-control" name="rIds" id="rIds">
+                    <c:forEach var="rule" items="${rules}" >
+                        <option value="${rule.id}">${rule.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <button class="btn btn-success">Сохранить</button>
     </table>
 </form>

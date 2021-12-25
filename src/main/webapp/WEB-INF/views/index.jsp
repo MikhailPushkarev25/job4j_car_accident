@@ -31,6 +31,7 @@
                 <th scope="col">Текст</th>
                 <th scope="col">Адрес</th>
                 <th scope="col">Тип</th>
+                <th scope="col">Статья</th>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +52,11 @@
                  </td>
                  <td>
                      <c:out value="${user.type.name}"/>
+                 </td>
+                 <td>
+                 <c:forEach items="${user.rules}" var="us">
+                     <c:out value="${us.name}"/>
+                 </c:forEach>
                  </td>
              </tr>
              </c:forEach>
