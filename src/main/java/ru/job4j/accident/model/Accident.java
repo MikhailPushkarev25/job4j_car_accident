@@ -9,6 +9,8 @@ public class Accident {
     private String text;
     private String address;
 
+    private AccidentType type;
+
     public Accident() {
     }
 
@@ -31,6 +33,14 @@ public class Accident {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
     }
 
     public String getName() {
