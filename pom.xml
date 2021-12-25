@@ -9,6 +9,7 @@
   <version>1.0</version>
   <packaging>war</packaging>
 
+
   <properties>
     <spring.version>5.2.4.RELEASE</spring.version>
   </properties>
@@ -23,7 +24,7 @@
     </plugin>
     <plugin>
       <artifactId>maven-compiler-plugin</artifactId>
-      <version>3.1</version>
+      <version>2.3.2</version>
       <configuration>
         <fork>true</fork>
         <executable>C:\Program Files\Java\jdk-15\bin\javac.exe</executable>
@@ -40,7 +41,11 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-install-plugin</artifactId>
+      <version>2.4</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
