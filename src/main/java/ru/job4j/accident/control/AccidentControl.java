@@ -16,7 +16,8 @@ public class AccidentControl {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("types", service.getAllType());
         return "accident/create";
     }
 
