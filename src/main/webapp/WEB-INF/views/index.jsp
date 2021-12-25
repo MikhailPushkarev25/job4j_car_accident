@@ -1,9 +1,10 @@
 <<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -29,6 +30,7 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Текст</th>
                 <th scope="col">Адрес</th>
+                <th scope="col">Тип</th>
             </tr>
             </thead>
             <tbody>
@@ -46,6 +48,9 @@
                  </td>
                  <td>
                      <c:out value="${user.address}"/>
+                 </td>
+                 <td>
+                     <c:out value="${user.type.name}"/>
                  </td>
              </tr>
              </c:forEach>

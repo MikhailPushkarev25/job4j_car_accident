@@ -1,22 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
     <form action="<c:url value='/save'/>" method='POST'>
         <table>
-            <tr>
-                <th>id</th>
-                <td><input type='text' name='id' readonly value="${accident.id}"></td>
-                <th>Name</th>
-                <td><input type='text' name='name' value="${accident.name}"></td>
-                <th>Text</th>
-                <td><input type='text' name='text' value="${accident.text}"></td>
-                <th>Address</th>
-                <td><input type='text' name='address' value="${accident.address}"></td>
-            </tr>
-            <tr>
-                <td colspan='2'><input name="submit" type="submit" value="Изменить"/></td>
-            </tr>
+            <div class="mb-3">
+                <label for="name" class="form-label">Имя нарушителя</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Введите имя нарушителя">
+            </div>
+            <div class="mb-3">
+                <label for="texts" class="form-label">Описание нарушителя</label>
+                <input type="text" name="text" class="form-control" id="texts" placeholder="Опишите нарушение">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Адрес нарушителя</label>
+                <input type="text" name="address" class="form-control" id="address" placeholder="Укажите адрес">
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="type.id">Тип происшествия</label>
+                    <select class="form-control" name="type.id" id="type.id">
+                        <c:forEach var="type" items="${types}" >
+                            <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-success">Сохранить</button>
         </table>
     </form>
 </body>

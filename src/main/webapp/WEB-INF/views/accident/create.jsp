@@ -33,6 +33,16 @@
             <label for="address" class="form-label">Адрес нарушителя</label>
             <input type="text" name="address" class="form-control" id="address" placeholder="Укажите адрес">
         </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="type.id">Тип происшествия</label>
+                <select class="form-control" name="type.id" id="type.id">
+                    <c:forEach var="type" items="${types}" >
+                        <option value="${type.id}">${type.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <button class="btn btn-success">Сохранить</button>
     </table>
 </form>
