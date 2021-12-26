@@ -20,10 +20,6 @@ public class AccidentService {
         result.createResult(accident);
     }
 
-    public Accident findById(int id) {
-        return result.findById(id);
-    }
-
     public Accident getAccident(int id) {
         return result.get(id);
     }
@@ -40,11 +36,29 @@ public class AccidentService {
         return result.getResultRule();
     }
 
-    public void save(Accident accident) {
+    public void save(Accident accident, String[] line) {
+        accident.setType(getType(accident.getType().getId()));
+        Set<Rule> res = new HashSet<>();
+        for (String str : line) {
+            res.add(getRule(Integer.parseInt(str)));
+        }
+        accident.setRules(res);
         result.saveResult(accident);
+    }
+
+    public void saveRule(Rule rule) {
+        result.saveResultRule(rule);
     }
 
     public void saveType(AccidentType accident) {
         result.saveResultType(accident);
+    }
+
+    public Rule getRule(int id) {
+        return result.getRule(id);
+    }
+
+    public AccidentType getType(int id) {
+        return result.getType(id);
     }
 }

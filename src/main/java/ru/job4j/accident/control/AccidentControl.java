@@ -27,15 +27,15 @@ public class AccidentControl {
     public String edit(@RequestParam("id") int id, Model model) {
         model.addAttribute("types", service.getAllType());
         model.addAttribute("rules", service.getAllRule());
-        Accident accident = service.findById(id);
+        Accident accident = service.getAccident(id);
         model.addAttribute("accident", accident);
         return "accident/edit";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        service.save(accident);
         String[] ids = req.getParameterValues("rIds");
+        service.save(accident, ids);
         return "redirect:/";
     }
 }

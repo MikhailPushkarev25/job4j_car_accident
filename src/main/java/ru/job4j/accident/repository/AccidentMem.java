@@ -18,12 +18,12 @@ public class AccidentMem {
     private final AtomicInteger sizeType = new AtomicInteger(4);
 
     private final Map<Integer, Rule> ruleMap = new HashMap<>();
+    private final AtomicInteger sizeRule = new AtomicInteger(4);
 
     public AccidentMem() {
         AccidentType type1 = AccidentType.of(1, "Две машины");
         AccidentType type2 = AccidentType.of(2, "Машина и человек");
         AccidentType type3 = AccidentType.of(3, "Машина и велосипед");
-
 
         Set<Rule> rules1 = Set.of(Rule.of(1, "Статья 1"));
         Set<Rule> rules2 = Set.of(Rule.of(2, "Статья 2"));
@@ -62,12 +62,16 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
-    public Accident findById(int id) {
+    public Accident get(int id) {
         return accidents.get(id);
     }
 
-    public Accident get(int id) {
-        return accidents.get(id);
+    public Rule getRule(int id) {
+        return ruleMap.get(id);
+    }
+
+    public AccidentType getType(int id) {
+        return typeMap.get(id);
     }
 
     public void saveResult(Accident accident) {
@@ -78,6 +82,11 @@ public class AccidentMem {
     public void saveResultType(AccidentType accidentType) {
         accidentType.setId(sizeType.getAndIncrement());
         typeMap.put(accidentType.getId(), accidentType);
+    }
+
+    public void saveResultRule(Rule rule) {
+        rule.setId(sizeRule.getAndIncrement());
+        ruleMap.put(rule.getId(), rule);
     }
 
     public Collection<Accident> getResult() {
