@@ -37,6 +37,7 @@ public class AccidentService {
     }
 
     public void save(Accident accident, String[] line) {
+
         accident.setType(getType(accident.getType().getId()));
         Set<Rule> res = new HashSet<>();
         for (String str : line) {
