@@ -35,26 +35,26 @@
             </tr>
             </thead>
             <tbody>
-             <c:forEach items="${users}" var="user">
+             <c:forEach items="${accidents}" var="accident">
              <tr>
                  <td>
-                     <a href="<c:url value='/edit?id=${user.id}'/>">Изменить</a>
+                     <a href="<c:url value='/edit?id=${accident.id}'/>">Изменить</a>
                      </a>
                  </td>
                  <td>
-                     <c:out value="${user.name}"/>
+                     <c:out value="${accident.name}"/>
                  </td>
                  <td>
-                     <c:out value="${user.text}"/>
+                     <c:out value="${accident.text}"/>
                  </td>
                  <td>
-                     <c:out value="${user.address}"/>
+                     <c:out value="${accident.address}"/>
                  </td>
                  <td>
-                     <c:out value="${user.type.name}"/>
+                     <c:out value="${accident.type.name}"/>
                  </td>
                  <td>
-                 <c:forEach items="${user.rules}" var="us">
+                 <c:forEach items="${accident.rules}" var="us">
                      <c:out value="${us.name}"/>
                  </c:forEach>
                  </td>
