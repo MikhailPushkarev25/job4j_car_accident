@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AccidentControl {
 
-    private AccidentService service;
+    private final AccidentService service;
 
     public AccidentControl(AccidentService service) {
         this.service = service;
@@ -18,24 +18,23 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", service.getAllType());
-        model.addAttribute("rules", service.getAllRule());
+        model.addAttribute("types", service.findAllAccidentType());
+        model.addAttribute("rules", service.findAllRule());
         return "accident/create";
-    }
-
-    @GetMapping("/edit")
-    public String edit(@RequestParam("id") int id, Model model) {
-        model.addAttribute("types", service.getAllType());
-        model.addAttribute("rules", service.getAllRule());
-        Accident accident = service.getAccident(id);
-        model.addAttribute("accident", accident);
-        return "accident/edit";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        service.save(accident, ids);
+        service.saveAccident(accident, ids);
         return "redirect:/";
+    }
+
+    @GetMapping
+    public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("rules", service.findAllRule());
+        model.addAttribute("types", service.findAllAccidentType());
+        model.addAttribute("accident", service.findById(id));
+        return "accident/update";
     }
 }
