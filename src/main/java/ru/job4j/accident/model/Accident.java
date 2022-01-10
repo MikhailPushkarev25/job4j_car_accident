@@ -1,31 +1,39 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "accident")
 public class Accident {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private String text;
-
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private AccidentType type;
 
-    private Set<Rule> rules;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Rule> rules = new HashSet<>();
 
     public Accident() {
     }
 
-    public Accident(String name, String text, String address, AccidentType type, Set<Rule> rules) {
+    public Accident(int id, String name, String text, String address, AccidentType type, Set<Rule> rules) {
+        this.id = id;
         this.name = name;
         this.text = text;
         this.address = address;
         this.type = type;
         this.rules = rules;
+
     }
 
     public int getId() {
@@ -34,14 +42,6 @@ public class Accident {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public AccidentType getType() {
-        return type;
-    }
-
-    public void setType(AccidentType type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -68,6 +68,14 @@ public class Accident {
         this.address = address;
     }
 
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
+    }
+
     public Set<Rule> getRules() {
         return rules;
     }
@@ -77,26 +85,27 @@ public class Accident {
     }
 
     public void addRule(Rule rule) {
+        if (rules == null) {
+            rules = new HashSet<>();
+        }
         rules.add(rule);
     }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Accident accident = (Accident) o;
         return id == accident.id
                 && Objects.equals(name, accident.name)
                 && Objects.equals(text, accident.text)
                 && Objects.equals(address, accident.address)
-                && Objects.equals(type, accident.type);
+                && Objects.equals(type, accident.type)
+                && Objects.equals(rules, accident.rules);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, text, address, type);
+        return Objects.hash(id, name, text, address, type, rules);
     }
 }

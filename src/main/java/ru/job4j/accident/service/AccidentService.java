@@ -3,16 +3,16 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.AccidentHibernate;
 
 import java.util.*;
 
 @Service
 public class AccidentService {
 
-    private final AccidentJdbcTemplate mem;
+    private final AccidentHibernate mem;
 
-    public AccidentService(AccidentJdbcTemplate mem) {
+    public AccidentService(AccidentHibernate mem) {
         this.mem = mem;
     }
 
@@ -35,14 +35,8 @@ public class AccidentService {
                 rules.add(findByIdRule(Integer.parseInt(id)));
             }
             accident.setRules(rules);
-        } else {
-            accident.setRules(findRulesByAccidentId(accident.getId()));
         }
         mem.save(accident);
-    }
-
-    private Set<Rule> findRulesByAccidentId(int id) {
-        return new HashSet<>(mem.findRulesByAccidentId(id));
     }
 
     public Accident findById(int id) {
@@ -50,10 +44,10 @@ public class AccidentService {
     }
 
     public AccidentType findByIdType(int id) {
-        return mem.findAccidentTypeById(id);
+        return mem.findByIdType(id);
     }
 
     public Rule findByIdRule(int id) {
-        return mem.findRuleById(id);
+        return mem.findByIdRule(id);
     }
 }

@@ -8,7 +8,7 @@ import ru.job4j.accident.model.Rule;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 public class AccidentMem {
 
     private final Map<Integer, Accident> accidents = new HashMap<>();
@@ -21,28 +21,28 @@ public class AccidentMem {
     private final AtomicInteger sizeRule = new AtomicInteger(4);
 
     public AccidentMem() {
-        AccidentType type1 = AccidentType.of(1, "Две машины");
-        AccidentType type2 = AccidentType.of(2, "Машина и человек");
-        AccidentType type3 = AccidentType.of(3, "Машина и велосипед");
-
-        Set<Rule> rules1 = Set.of(Rule.of(1, "Статья 1"));
-        Set<Rule> rules2 = Set.of(Rule.of(2, "Статья 2"));
-        Set<Rule> rules3 = Set.of(Rule.of(3, "Статья 3"));
-
-        accidents.put(1, new Accident(
-                 "Михаил", "Превышение скорости", "пр-кт Ленина 32", type1, rules1));
-        accidents.put(2, new Accident(
-                 "Роман", "Не пропустил пешехода", "ул. Баумана 100", type2, rules2));
-        accidents.put(3, new Accident(
-                "Василий", "совершил ДТП", "пр-скт Гагарина 35", type3, rules3));
-
-        typeMap.put(1,  AccidentType.of(1, "Две машины"));
-        typeMap.put(2,  AccidentType.of(2, "Машина и человек"));
-        typeMap.put(3,  AccidentType.of(3, "Машина и велосипед"));
-
-        ruleMap.put(1,  Rule.of(1, "Статья 1"));
-        ruleMap.put(2,  Rule.of(2, "Статья 2"));
-        ruleMap.put(3,  Rule.of(3, "Статья 3"));
+//        AccidentType type1 = AccidentType.of(1, "Две машины");
+//        AccidentType type2 = AccidentType.of(2, "Машина и человек");
+//        AccidentType type3 = AccidentType.of(3, "Машина и велосипед");
+//
+//        Set<Rule> rules1 = Set.of(Rule.of(1, "Статья 1"));
+//        Set<Rule> rules2 = Set.of(Rule.of(2, "Статья 2"));
+//        Set<Rule> rules3 = Set.of(Rule.of(3, "Статья 3"));
+//
+////        accidents.put(1, new Accident(
+////                 "Михаил", "Превышение скорости", "пр-кт Ленина 32", type1, rules1));
+////        accidents.put(2, new Accident(
+////                 "Роман", "Не пропустил пешехода", "ул. Баумана 100", type2, rules2));
+////        accidents.put(3, new Accident(
+////                "Василий", "совершил ДТП", "пр-скт Гагарина 35", type3, rules3));
+//
+//        typeMap.put(1,  AccidentType.of(1, "Две машины"));
+//        typeMap.put(2,  AccidentType.of(2, "Машина и человек"));
+//        typeMap.put(3,  AccidentType.of(3, "Машина и велосипед"));
+//
+//        ruleMap.put(1,  Rule.of(1, "Статья 1"));
+//        ruleMap.put(2,  Rule.of(2, "Статья 2"));
+//        ruleMap.put(3,  Rule.of(3, "Статья 3"));
     }
 
     public Collection<AccidentType> getValue() {
