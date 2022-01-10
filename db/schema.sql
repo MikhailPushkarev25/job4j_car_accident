@@ -18,7 +18,6 @@ CREATE TABLE accident_rule (
 );
 
 CREATE TABLE type_rule (
-  id serial primary key,
   acciident_id int references accident(id),
   rule_id int references accident_rule(id)
 );

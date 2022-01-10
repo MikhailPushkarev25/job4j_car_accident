@@ -2,10 +2,17 @@ package ru.job4j.accident.repository;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 @Repository
@@ -23,18 +30,37 @@ public class AccidentJdbcTemplate {
                     accident.getName(),
                     accident.getId());
         } else {
-            jdbc.update("insert into accident (name, text, address, type_id)"
-                            + " values (?, ?, ?, ?)",
-                    accident.getName(),
-                    accident.getText(),
-                    accident.getAddress(),
-                    accident.getType().getId());
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            jdbc.update(
+                    new PreparedStatementCreator() {
+                        @Override
+                        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                            PreparedStatement ps = connection.prepareStatement(
+                                    "insert into accident (name, text, address, type_id) values (?, ?, ?, ?)",
+                                    new String[]{"id"}
+                            );
+                            ps.setString(1, accident.getName());
+                            ps.setString(2, accident.getText());
+                            ps.setString(3, accident.getAddress());
+                            ps.setInt(4, accident.getType().getId());
+                            return ps;
+                        }
+                    }, keyHolder
+            );
+            accident.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
+            for (Rule elem : accident.getRules()) {
+                jdbc.update("insert into type_rule (acciident_id, rule_id) values (?, ?)",
+                        accident.getId(),
+                        elem.getId()
+                );
+            }
         }
-        return accident;
-    }
+            return accident;
+        }
 
     public List<Accident> getAll() {
-        return jdbc.query("select * from accident order by id asc",
+        List<Accident> buffer = new ArrayList<>();
+         buffer = jdbc.query("select * from accident order by id asc",
                 (rs, row) -> {
                     Accident accident = new Accident();
                     int accidentTypeId = rs.getInt("type_id");
@@ -43,8 +69,10 @@ public class AccidentJdbcTemplate {
                     accident.setText(rs.getString("text"));
                     accident.setAddress(rs.getString("address"));
                     accident.setType(findAccidentTypeById(accidentTypeId));
+                    accident.setRules(new HashSet<>(findRulesByAccidentId(accident.getId())));
                     return accident;
                 });
+         return buffer;
     }
 
     public Collection<AccidentType> getAllType() {
@@ -109,12 +137,16 @@ public class AccidentJdbcTemplate {
     }
 
     public List<Rule> findRulesByAccidentId(int id) {
-        return jdbc.query("select * from type_rule where acciident_id = ?",
+        List<Rule> buffer = jdbc.query("select * from type_rule where acciident_id = ?",
                 (rs, row) -> {
                     Rule rule = new Rule();
-                    rule.setId(rs.getInt("id"));
-                    rule.setName(rs.getString("name"));
+                   rule.setId(rs.getInt("rule_id"));
                     return rule;
                 }, id);
+        List<Rule> result = new ArrayList<>();
+        for (Rule rule : buffer) {
+            result.add(findRuleById(rule.getId()));
+        }
+        return result;
     }
 }
