@@ -17,6 +17,12 @@ CREATE TABLE accident_rule (
   name varchar(2000)
 );
 
+CREATE TABLE type_rule (
+  id serial primary key,
+  acciident_id int references accident(id),
+  rule_id int references accident_rule(id)
+);
+
 insert into accident_type(name) values
                                       ('машина и пешеход'),
                                       ('машина и велосипед'),

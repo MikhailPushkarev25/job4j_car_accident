@@ -29,13 +29,20 @@ public class AccidentService {
     }
 
     public void saveAccident(Accident accident, String[] str) {
-        accident.setType(findByIdType(accident.getType().getId()));
-        Set<Rule> rules = new HashSet<>();
-        for (String line : str) {
-            rules.add(findByIdRule(Integer.parseInt(line)));
+        if (str != null) {
+            Set<Rule> rules = new HashSet<>();
+            for (String id : str) {
+                rules.add(findByIdRule(Integer.parseInt(id)));
+            }
+            accident.setRules(rules);
+        } else {
+            accident.setRules(findRulesByAccidentId(accident.getId()));
         }
-        accident.setRules(rules);
         mem.save(accident);
+    }
+
+    private Set<Rule> findRulesByAccidentId(int id) {
+        return new HashSet<>(mem.findRulesByAccidentId(id));
     }
 
     public Accident findById(int id) {
@@ -43,10 +50,10 @@ public class AccidentService {
     }
 
     public AccidentType findByIdType(int id) {
-        return mem.findByIdType(id);
+        return mem.findAccidentTypeById(id);
     }
 
     public Rule findByIdRule(int id) {
-        return mem.findByIdRule(id);
+        return mem.findRuleById(id);
     }
 }
