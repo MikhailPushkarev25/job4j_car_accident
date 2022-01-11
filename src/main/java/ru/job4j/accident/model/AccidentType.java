@@ -40,14 +40,18 @@ public class AccidentType {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AccidentType that = (AccidentType) o;
-        return id == that.id && Objects.equals(name, that.name);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id);
     }
 }
