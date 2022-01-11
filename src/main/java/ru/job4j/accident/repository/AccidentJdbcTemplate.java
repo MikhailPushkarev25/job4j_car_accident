@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -15,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
 
-
+@Repository
 public class AccidentJdbcTemplate {
 
     private final JdbcTemplate jdbc;
@@ -24,6 +25,7 @@ public class AccidentJdbcTemplate {
         this.jdbc = jdbc;
     }
 
+    @Transactional
     public Accident save(Accident accident) {
         if (accident.getId() != 0) {
             jdbc.update("update accident set name = ? where id = ?",

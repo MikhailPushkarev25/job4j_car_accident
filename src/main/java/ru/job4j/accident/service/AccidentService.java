@@ -4,15 +4,16 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentHibernate;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import java.util.*;
 
 @Service
 public class AccidentService {
 
-    private final AccidentHibernate mem;
+    private final AccidentJdbcTemplate mem;
 
-    public AccidentService(AccidentHibernate mem) {
+    public AccidentService(AccidentJdbcTemplate mem) {
         this.mem = mem;
     }
 
@@ -44,10 +45,10 @@ public class AccidentService {
     }
 
     public AccidentType findByIdType(int id) {
-        return mem.findByIdType(id);
+        return mem.findAccidentTypeById(id);
     }
 
     public Rule findByIdRule(int id) {
-        return mem.findByIdRule(id);
+        return mem.findRuleById(id);
     }
 }
