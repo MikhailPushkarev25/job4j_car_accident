@@ -19,6 +19,9 @@
     <title>Accident</title>
 </head>
 <body>
+<div>
+    Login as : ${user.username}
+</div>
 <div class="card-body">
     <table class="table">
         <thead>
