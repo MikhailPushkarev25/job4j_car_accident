@@ -3,29 +3,37 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentHibernate;
+import ru.job4j.accident.repository.AccidentRepository;
+import ru.job4j.accident.repository.AccidentTypeRepository;
+import ru.job4j.accident.repository.RuleRepository;
 
 import java.util.*;
 
 @Service
 public class AccidentService {
 
-    private final AccidentHibernate mem;
+    private final AccidentRepository acc;
+    private final AccidentTypeRepository accType;
+    private final RuleRepository rule;
 
-    public AccidentService(AccidentHibernate mem) {
-        this.mem = mem;
+    public AccidentService(AccidentRepository acc,
+                           AccidentTypeRepository accType,
+                           RuleRepository rule) {
+        this.acc = acc;
+        this.accType = accType;
+        this.rule = rule;
     }
 
     public Collection<Accident> findAllAccident() {
-        return mem.getAll();
+        return acc.findAll();
     }
 
     public Collection<AccidentType> findAllAccidentType() {
-        return mem.getAllType();
+        return (Collection<AccidentType>) accType.findAll();
     }
 
     public Collection<Rule> findAllRule() {
-        return mem.getAllRule();
+        return (Collection<Rule>) rule.findAll();
     }
 
     public void saveAccident(Accident accident, String[] str) {
@@ -36,18 +44,18 @@ public class AccidentService {
             }
             accident.setRules(rules);
         }
-        mem.save(accident);
+        acc.save(accident);
     }
 
     public Accident findById(int id) {
-        return mem.findByIdAccident(id);
+        return acc.findAccidentById(id);
     }
 
     public AccidentType findByIdType(int id) {
-        return mem.findByIdType(id);
+        return accType.findById(id).orElse(null);
     }
 
     public Rule findByIdRule(int id) {
-        return mem.findByIdRule(id);
+        return rule.findById(id).orElse(null);
     }
 }

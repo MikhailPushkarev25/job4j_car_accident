@@ -20,24 +20,24 @@ public class AccidentMem {
     private final AtomicInteger sizeRule = new AtomicInteger(4);
 
     public AccidentMem() {
-        AccidentType type1 = AccidentType.of(1, "Две машины");
-        AccidentType type2 = AccidentType.of(2, "Машина и человек");
-        AccidentType type3 = AccidentType.of(3, "Машина и велосипед");
+        AccidentType type1 = AccidentType.of("Две машины");
+        AccidentType type2 = AccidentType.of("Машина и человек");
+        AccidentType type3 = AccidentType.of("Машина и велосипед");
 
         Set<Rule> rules1 = Set.of(Rule.of("Статья 1"));
         Set<Rule> rules2 = Set.of(Rule.of("Статья 2"));
         Set<Rule> rules3 = Set.of(Rule.of("Статья 3"));
 
-        accidents.put(1, new Accident(1,
+        accidents.put(1, new Accident(
                  "Михаил", "Превышение скорости", "пр-кт Ленина 32", type1, rules1));
-        accidents.put(2, new Accident(2,
+        accidents.put(2, new Accident(
                  "Роман", "Не пропустил пешехода", "ул. Баумана 100", type2, rules2));
-        accidents.put(3, new Accident(3,
+        accidents.put(3, new Accident(
                 "Василий", "совершил ДТП", "пр-скт Гагарина 35", type3, rules3));
 
-        typeMap.put(1,  AccidentType.of(1, "Две машины"));
-        typeMap.put(2,  AccidentType.of(2, "Машина и человек"));
-        typeMap.put(3,  AccidentType.of(3, "Машина и велосипед"));
+        typeMap.put(1,  AccidentType.of("Две машины"));
+        typeMap.put(2,  AccidentType.of("Машина и человек"));
+        typeMap.put(3,  AccidentType.of("Машина и велосипед"));
 
         ruleMap.put(1,  Rule.of("Статья 1"));
         ruleMap.put(2,  Rule.of("Статья 2"));

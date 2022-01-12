@@ -20,15 +20,14 @@ public class Accident {
     @JoinColumn(name = "type_id")
     private AccidentType type;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Rule> rules = new HashSet<>();
 
     public Accident() {
     }
 
     public Accident(
-            int id, String name, String text, String address, AccidentType type, Set<Rule> rules) {
-        this.id = id;
+            String name, String text, String address, AccidentType type, Set<Rule> rules) {
         this.name = name;
         this.text = text;
         this.address = address;
