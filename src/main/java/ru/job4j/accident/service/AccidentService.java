@@ -1,5 +1,6 @@
 package ru.job4j.accident.service;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -24,6 +25,7 @@ public class AccidentService {
         this.rule = rule;
     }
 
+    @Transactional
     public Collection<Accident> findAllAccident() {
         return acc.findAll();
     }
@@ -36,6 +38,7 @@ public class AccidentService {
         return (Collection<Rule>) rule.findAll();
     }
 
+    @Transactional
     public void saveAccident(Accident accident, String[] str) {
         if (str != null) {
             Set<Rule> rules = new HashSet<>();
