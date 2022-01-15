@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccidentControl {
-
     private final AccidentService service;
 
     public AccidentControl(AccidentService service) {
@@ -24,7 +23,8 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+    public String save(@ModelAttribute Accident accident,
+                       HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
         service.saveAccident(accident, ids);
         return "redirect:/";

@@ -64,6 +64,9 @@
                 </td>
             </tr>
         </c:forEach>
+        <div>
+            <img src="">
+        </div>
         </tbody>
     </table>
     <a href="<c:url value='/create'/>">Добавить инцидент</a>

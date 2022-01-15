@@ -11,6 +11,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -19,7 +22,7 @@ import javax.sql.DataSource;
 @PropertySource("classpath:app.properties")
 @EnableJpaRepositories("ru.job4j.accident.repository")
 @EnableTransactionManagement
-public class DataConfig {
+public class DataConfig implements WebMvcConfigurer {
 
     @Bean
     public DataSource ds(@Value("${jdbc.driver}") String driver,
